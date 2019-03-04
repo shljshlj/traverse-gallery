@@ -1,0 +1,206 @@
+@font-face {
+    font-family: Porter;
+    src: url("https://zephyo.github.io/22Days/code/15/graphics/Porter Bold.ttf");
+}
+
+.title, .rainbow-title {
+    color: #1c5082;
+    font-family: 'Porter';
+    line-height: 3.6rem;
+    -webkit-transform: skew(-5.5deg);
+    transform: skew(-5.5deg);
+    text-shadow: -1px -1px black, 1px -1px black, -1px 1px black, 1px 1px black, -5px -5px #4896bc, -6px -6px black, -4px -4px black, -6px -4px black, -4px -6px black, -10px -10px #87bc9e, -11px -11px black, -9px -9px black, -11px -9px black, -9px -11px black, -15px -15px #edd7a8, -16px -16px black, -14px -14px black, -16px -14px black, -14px -16px black, -20px -20px #f0c1af, -21px -21px black, -19px -19px black, -21px -19px black, -19px -21px black, 9px 0px white, 8px 1px white, 7px 2px white, 7px 3px white, 6px 4px white, -6px 2px white, 6px 6px white, 0px 6px white, -6px 6px white, -6px 0px white, -10px -10px white, -12px -23px white, -9px -20px white, -6px -18px white, -2px -14px white, 2px -10px white, 5px -7px white, 7px -3px white, -20px -14px white, -2px -14px white, -17px -26px white, -20px -26px white, -12px -20px white, -27px -23px white, -26px -20px white, -25px -18px white, -24px -17px white, -24px -15px white, -22px -13px white, -20px -10px white, -18px -8px white, -16px -7px white, -15px -3px white, 2px 2px 22px black, -22px -22px 22px black, -18px -12px 22px black, -5px -15px 22px black;
+}
+
+/*  
+    Above code is from Angela He
+    https://codepen.io/zephyo/pen/jXGQxV?editors=1100
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.border {
+    border: 3px solid #ff8279;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    min-height: 100vh;
+    background-color: #fffde3;
+    background-image: url("https://www.transparenttextures.com/patterns/elastoplast.png");
+}
+
+.gallery {
+    width: 60vw;
+    height: 40vh;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(100px, 1fr));
+    grid-template-rows: auto 1fr;
+    grid-gap: 10px;
+    grid-template-areas:
+        "title title title";
+    align-items: center;
+    justify-items: center;
+    padding: 0 10px 20px;
+    border-radius: 3px;
+}
+
+.gallery.one {
+    background-color: #c5b7b6;
+}
+
+.gallery.two {
+    background-color: #8b9ead;
+}
+
+.title {
+    font-size: calc(2vw + 1em);
+    text-align: center;
+    padding: 40px 0 20px;
+    grid-area: title;
+}
+
+.gallery img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 3px;
+}
+
+/*
+    If .gallery has 'max-height' set, instead of 'height' ->
+    setting 'max-height' for <img> won't work in Chrome,
+    but does work in Firefox!
+*/
+
+.credits, .explain {
+    position: absolute;
+    background-color: white;
+    border-radius: 3px;
+    border: 1px solid black;
+    padding: 10px;
+    font-family: 'Porter';
+    font-size: .7rem;
+    opacity: 0.7;
+}
+
+.credits {
+    bottom: 20px;
+    right: 20px;
+}
+
+.credits a {
+    display: block;
+    color: #c58c88;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+.credits a:nth-last-child(1) {
+    margin: 0;
+}
+
+.credits a:hover {
+    color: #b40c00;
+}
+
+.explain {
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.explain:hover {
+    animation: animateTextColor 2s ease-in infinite;
+}
+
+/* Modal */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 253, 227, 0.67);
+    z-index: 1;
+}
+
+.modal-content {
+    margin: 20vh auto;
+    position: relative;
+    width: max-content;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    border: 1px solid #4896bc78;
+    box-shadow: 0 4px 8px 0 #4896bc, 0 6px 20px 0 rgba(242, 255, 0, 0.7);
+    animation-name: animatetop;
+    animation-duration: 0.6s
+}
+
+.modal-header {
+    background-color: #c58c88;
+    padding: 10px 20px;
+}
+
+.modal-content h3 {
+    font-size: 2rem;
+    text-align: center;
+    margin: 30px 0 0;
+    font-family: 'Porter';
+    transform: skew(-5.5deg);
+}
+
+.rainbow-title {
+    display: inline-block;
+    margin-left: 30px;
+}
+
+.close {
+    float: right;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #00ff6f;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-body {
+    background-color: #87bc9e;
+    padding: 50px 20px;
+    text-align: center;
+    font-size: 1.5rem;
+    letter-spacing: 4px;
+}
+
+
+/* Animations */
+
+@keyframes animateTextColor {
+    0% {
+        color: #1b75cc;
+    }
+    50% {
+        color: #ff9100;
+    }
+    100% {
+        color: #8a33e6;
+    }
+}
+  
+@keyframes animatetop {
+    from {top:-400px; opacity:0}
+    to {top:0; opacity:1}
+}
